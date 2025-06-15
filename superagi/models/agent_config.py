@@ -1,4 +1,10 @@
-from fastapi import HTTPException
+try:
+    from fastapi import HTTPException
+except Exception:  # pragma: no cover - fallback for missing fastapi
+    class HTTPException(Exception):
+        def __init__(self, status_code: int | None = None, detail: str | None = None):
+            self.status_code = status_code
+            self.detail = detail
 from sqlalchemy import Column, Integer, Text, String
 from typing import Union
 

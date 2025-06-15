@@ -6,7 +6,13 @@ from superagi.models.project import Project
 from superagi.models.models import Models
 from superagi.llms.openai import OpenAi
 from superagi.helper.encyption_helper import encrypt_data, decrypt_data
-from fastapi import HTTPException
+try:
+    from fastapi import HTTPException
+except Exception:  # pragma: no cover - fallback for missing fastapi
+    class HTTPException(Exception):
+        def __init__(self, status_code: int | None = None, detail: str | None = None):
+            self.status_code = status_code
+            self.detail = detail
 import logging
 
 class ModelsConfig(DBBaseModel):
