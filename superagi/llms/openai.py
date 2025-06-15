@@ -1,6 +1,13 @@
 import openai
-from openai import APIError, InvalidRequestError
-from openai.error import RateLimitError, AuthenticationError, Timeout, TryAgain
+try:
+    from openai import APIError, InvalidRequestError
+except ImportError:  # pragma: no cover - handle newer openai versions
+    from openai import APIError
+    from openai import BadRequestError as InvalidRequestError
+try:
+    from openai.error import RateLimitError, AuthenticationError, Timeout, TryAgain
+except Exception:  # pragma: no cover - fallback for new versions
+    from openai._exceptions import RateLimitError, AuthenticationError, APITimeoutError as Timeout, APIError as TryAgain
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_random_exponential
 
 from superagi.config.config import get_config
