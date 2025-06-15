@@ -1,6 +1,8 @@
 import os
-from pydantic import BaseSettings
 from pathlib import Path
+
+from dotenv import load_dotenv
+from pydantic import BaseSettings
 import yaml
 from superagi.lib.logger import logger
 
@@ -14,6 +16,9 @@ class Config(BaseSettings):
 
     @classmethod
     def load_config(cls, config_file: str) -> dict:
+        # Load environment variables from .env if present
+        load_dotenv()
+
         # If config file exists, read it
         if os.path.exists(config_file):
             with open(config_file, "r") as file:

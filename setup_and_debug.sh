@@ -1,6 +1,5 @@
 #!/bin/bash
 set -ex
-set -e
 
 # Ensure Python3, pip and virtualenv are installed
 sudo apt-get update
@@ -52,9 +51,10 @@ if ! pytest -vv --maxfail=5 tests/unit_tests; then
     echo "Pytest reported failures"
     CRITICAL=1
 fi
+python -m unittest discover -v || true
 
 # Network reachability tests
-for domain in awscli.amazonaws.com packages.cloud.google.com aka.ms; do
+for domain in awscli.amazonaws.com packages.cloud.google.com aka.ms pypi.org github.com; do
     if ping -c 1 -W 1 "$domain" >/dev/null 2>&1; then
         echo "$domain reachable"
     else

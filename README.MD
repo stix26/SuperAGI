@@ -147,6 +147,33 @@ cd SuperAGI
 <a href="https://cloud.digitalocean.com/apps/new?repo=https://github.com/TransformerOptimus/SuperAGI/tree/main"> <img src="https://www.deploytodo.com/do-btn-blue.svg"></a><br>Deploy SuperAGI to DigitalOcean with one click.
 </p>
 
+### Development Setup
+To work on SuperAGI locally without Docker:
+
+```bash
+./setup_and_debug.sh
+```
+
+Activate the environment with:
+
+```bash
+source venv/bin/activate
+```
+
+Run the application:
+
+```bash
+python main.py
+```
+
+Execute tests:
+
+```bash
+make test
+```
+
+Key environment values can be set in a `.env` file and will override `config.yaml`.
+
 <a id="architecture">
 
 ### 🌐 Architecture
