@@ -30,6 +30,9 @@ jobs:
       with:
         python-version: "3.9"
 
+    - name: Bootstrap dev environment
+      run: sudo ./scripts/bootstrap_dev_env.sh
+
     - name: Cache Python dependencies
       uses: actions/cache@v2
       with:
@@ -85,6 +88,9 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: "3.9"
+
+      - name: Bootstrap dev environment
+        run: sudo ./scripts/bootstrap_dev_env.sh
 
       - name: Cache dependencies
         uses: actions/cache@v2
